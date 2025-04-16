@@ -22,4 +22,4 @@ def get_date(date: str) -> str:
     Функция преобразования формата даты
     """
     date_str = date[:10]
-    return datetime.strptime(date_str, '%Y-%m-%d').date().strftime('%d.%m.%Y')
+    return datetime.strptime(date_str, "%Y-%m-%d").date().strftime("%d.%m.%Y")
