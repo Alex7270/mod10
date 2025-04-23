@@ -1,8 +1,9 @@
 import pytest
 
-from src.masks import get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 c = "Введен некорректный номер карты"
+
 
 
 @pytest.mark.parametrize(
@@ -44,13 +45,19 @@ def test_get_mask_card_number_incorrect(card_number_incorrect: str, expected: st
     assert get_mask_card_number(card_number_incorrect) == expected
 
 
-# def test_get_mask_account_correct(account_number: str) -> str:
-#     """
-#
-#     :param account_number:
-#     :return:
-#     """
-#     assert get_mask_account("64686473678894779589") == "**9589"
+@pytest.mark.parametrize(
+    "account_number_correct, expected",
+    [("64686473678894779589", "**9589"), ("35383033474447895560", "**5560"), ("73654108430135874305", "**4305")],
+)
+def test_get_mask_account_correct(account_number_correct: str, expected: str) -> None:
+    """
+    Функция тестирования правильности маскирования номера счета
+    :param account_number_correct:      :param expected: str
+    :return:
+    """
+    assert get_mask_account(account_number_correct) == expected
+
+
 #     assert get_mask_account("6468647367889477958977888") == "Введен некорректный номер счета"
 #     assert get_mask_account("64686473678") == "Введен некорректный номер счета"
 #     assert get_mask_account("") == "Введен некорректный номер счета"
