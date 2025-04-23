@@ -1,17 +1,57 @@
-from src.masks import get_mask_account, get_mask_card_number
+import pytest
+
+from src.masks import get_mask_card_number
+
+c = "Введен некорректный номер карты"
 
 
-def test_get_mask_card_number() -> None:
-    assert get_mask_card_number("1596837868705199") == "1596 83** **** 5199"
-    assert get_mask_card_number("1596837868705199555") == "Введен некорректный номер карты"
-    assert get_mask_card_number("159683786") == "Введен некорректный номер карты"
-    assert get_mask_card_number("") == "Введен некорректный номер карты"
-    assert get_mask_card_number("hhhha  ayyyyrrrr") == "Введен некорректный номер карты"
+@pytest.mark.parametrize(
+    "card_number_correct, expected",
+    [
+        ("1596837868705199", "1596 83** **** 5199"),
+        ("7158300734726758", "7158 30** **** 6758"),
+        ("6831982476737658", "6831 98** **** 7658"),
+        ("8990922113665229", "8990 92** **** 5229"),
+        ("5999414228426353", "5999 41** **** 6353"),
+    ],
+)
+def test_get_mask_card_number_correct(card_number_correct: str, expected: str) -> None:
+    """
+    Функция тестирования правильности маскирования номера карты
+    :param card_number_correct: str     :param expected:
+    :return: None
+    """
+    assert get_mask_card_number(card_number_correct) == expected
 
 
-def test_get_mask_account() -> None:
-    assert get_mask_account("64686473678894779589") == "**9589"
-    assert get_mask_account("6468647367889477958977888") == "Введен некорректный номер счета"
-    assert get_mask_account("64686473678") == "Введен некорректный номер счета"
-    assert get_mask_account("") == "Введен некорректный номер счета"
-    assert get_mask_account("hhhh____kkkk//  1234") == "Введен некорректный номер счета"
+@pytest.mark.parametrize(
+    "card_number_incorrect, expected",
+    [
+        ("", c),
+        ("1596837868705199555", c),
+        ("1596837868", c),
+        ("ff ff_______oooo", c),
+        ("hh hha__ayy_my-r", c),
+        ("55555gggIIII1228", c),
+    ],
+)
+def test_get_mask_card_number_incorrect(card_number_incorrect: str, expected: str) -> None:
+    """
+    Функция тестирования правильности ввода номера карты
+    :param card_number_incorrect: str    :param expected: str
+    :return: None
+    """
+    assert get_mask_card_number(card_number_incorrect) == expected
+
+
+# def test_get_mask_account_correct(account_number: str) -> str:
+#     """
+#
+#     :param account_number:
+#     :return:
+#     """
+#     assert get_mask_account("64686473678894779589") == "**9589"
+#     assert get_mask_account("6468647367889477958977888") == "Введен некорректный номер счета"
+#     assert get_mask_account("64686473678") == "Введен некорректный номер счета"
+#     assert get_mask_account("") == "Введен некорректный номер счета"
+#     assert get_mask_account("hhhh____k kkk//  1234") == "Введен некорректный номер счета"
