@@ -3,7 +3,7 @@ import pytest
 from src.masks import get_mask_account, get_mask_card_number
 
 c = "Введен некорректный номер карты"
-
+a = "Введен некорректный номер счета"
 
 
 @pytest.mark.parametrize(
@@ -58,7 +58,21 @@ def test_get_mask_account_correct(account_number_correct: str, expected: str) ->
     assert get_mask_account(account_number_correct) == expected
 
 
-#     assert get_mask_account("6468647367889477958977888") == "Введен некорректный номер счета"
-#     assert get_mask_account("64686473678") == "Введен некорректный номер счета"
-#     assert get_mask_account("") == "Введен некорректный номер счета"
-#     assert get_mask_account("hhhh____k kkk//  1234") == "Введен некорректный номер счета"
+@pytest.mark.parametrize(
+    "account_number_incorrect, expected",
+    [
+        ("", a),
+        ("6468647367889477958977888", a),
+        ("1596837868", a),
+        ("1359 _______oooo  44", a),
+        ("hhhh____k kkk//  1234", a),
+        ("55555gggIIII1228  --", a),
+    ],
+)
+def test_get_mask_account_incorrect(account_number_incorrect: str, expected: str) -> None:
+    """
+    Функция тестирования правильности ввода номера счета
+    :param account_number_incorrect:      :param expected: str
+    :return:
+    """
+    assert get_mask_account(account_number_incorrect) == expected

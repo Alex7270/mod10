@@ -14,3 +14,15 @@ def card_number_incorrect() -> list[str]:
 @pytest.fixture
 def account_number_correct() -> list[str]:
     return ["64686473678894779589", "35383033474447895560", "73654108430135874305"]
+
+
+@pytest.fixture
+def account_number_incorrect() -> list[str]:
+    return [
+        "",
+        "6468647367889477958977888",
+        "1596837868",
+        "1359 _______oooo  44",
+        "hhhh____k kkk//  1234",
+        "55555gggIIII1228  --",
+    ]
