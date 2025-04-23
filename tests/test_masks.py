@@ -53,7 +53,7 @@ def test_get_mask_account_correct(account_number_correct: str, expected: str) ->
     """
     Функция тестирования правильности маскирования номера счета
     :param account_number_correct:      :param expected: str
-    :return:
+    :return: None
     """
     assert get_mask_account(account_number_correct) == expected
 
@@ -73,6 +73,6 @@ def test_get_mask_account_incorrect(account_number_incorrect: str, expected: str
     """
     Функция тестирования правильности ввода номера счета
     :param account_number_incorrect:      :param expected: str
-    :return:
+    :return: None
     """
     assert get_mask_account(account_number_incorrect) == expected
