@@ -23,3 +23,26 @@ def test_mask_account_card_correct(correct_number: str, expected: str) -> None:
     :param correct_number: str    :return: str
     """
     assert mask_account_card(correct_number) == expected
+
+
+
+@pytest.mark.parametrize(
+    "incorrect_number, expected",
+    [
+        ("", "Вы не ввели номер"),
+        ("Счет", "Вы не ввели номер"),
+        ("MasterCard", "Вы не ввели номер"),
+        ("Счет  35383__033474447895560", "Счет Введен некорректный номер счета"),
+        ("Visa  Classic 68319824767 37658", "Visa Classic Введен некорректный номер карты"),
+        ("Visa Platinum 89  90922113665229", "Visa Platinum Введен некорректный номер карты"),
+        ("Visa Gold 59994---14228426353", "Visa Gold Введен некорректный номер карты"),
+        (" Счет 7365410  hhh8430135874305  ", "Счет Введен некорректный номер счета"),
+    ],
+)
+def test_mask_account_card_incorrect(incorrect_number: str, expected: str) -> None:
+    """
+    Функция тестирования корректного распознавания и маскировки
+    в зависимости от типа входных данных (карта или счет)
+    :param incorrect_number: str    :return: str
+    """
+    assert mask_account_card(incorrect_number) == expected

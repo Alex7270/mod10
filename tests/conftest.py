@@ -40,3 +40,17 @@ def correct_number() -> list[str]:
         "Visa Gold 5999414228426353",
         "Счет 73654108430135874305",
     ]
+
+
+@pytest.fixture
+def incorrect_number() -> list[str]:
+    return [
+        "",
+        "Счет",
+        "MasterCard",
+        "Счет  35383__033474447895560",
+        "Visa   Classic   6831982476737658",
+        "Visa Platinum 89  90922113665229",
+        "Visa Gold 59994---14228426353",
+        " Счет 7365410  hhh8430135874305  ",
+    ]
