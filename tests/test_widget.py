@@ -52,12 +52,13 @@ def test_mask_account_card_incorrect(incorrect_number: str, expected: str) -> No
     [
         ("2024-03-11T02:26:18.671407", "11.03.2024"),
         ("2024-05-12T02:26:19.671407", "12.05.2024"),
+        ("2025-04-10T03:25:18.672807", "10.04.2025"),
     ],
 )
 def test_get_date_correct(correct_number: str, expected: str) -> None:
     """
     Функция тестирование правильности преобразования даты
-    :param correct_number: str    :param expected:
-    :return:
+    :param correct_number: str    :param expected: str
+    :return: None
     """
     assert get_date(correct_number) == expected
