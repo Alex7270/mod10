@@ -1,6 +1,6 @@
 import pytest
 
-from src.widget import mask_account_card
+from src.widget import get_date, mask_account_card
 
 
 @pytest.mark.parametrize(
@@ -25,7 +25,6 @@ def test_mask_account_card_correct(correct_number: str, expected: str) -> None:
     assert mask_account_card(correct_number) == expected
 
 
-
 @pytest.mark.parametrize(
     "incorrect_number, expected",
     [
@@ -46,3 +45,19 @@ def test_mask_account_card_incorrect(incorrect_number: str, expected: str) -> No
     :param incorrect_number: str    :return: str
     """
     assert mask_account_card(incorrect_number) == expected
+
+
+@pytest.mark.parametrize(
+    "correct_number, expected",
+    [
+        ("2024-03-11T02:26:18.671407", "11.03.2024"),
+        ("2024-05-12T02:26:19.671407", "12.05.2024"),
+    ],
+)
+def test_get_date_correct(correct_number: str, expected: str) -> None:
+    """
+    Функция тестирование правильности преобразования даты
+    :param correct_number: str    :param expected:
+    :return:
+    """
+    assert get_date(correct_number) == expected

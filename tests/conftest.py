@@ -54,3 +54,8 @@ def incorrect_number() -> list[str]:
         "Visa Gold 59994---14228426353",
         " Счет 7365410  hhh8430135874305  ",
     ]
+
+
+@pytest.fixture
+def correct_date() -> list[str]:
+    return ["2024-03-11T02:26:18.671407", "2024-05-12T02:26:19.671407", "2025-04-10T03:25:18.672807"]
