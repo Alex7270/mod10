@@ -3,6 +3,8 @@ import pytest
 from src.widget import get_date, mask_account_card
 
 
+
+
 @pytest.mark.parametrize(
     "correct_number, expected",
     [
@@ -41,6 +43,7 @@ def test_mask_account_card_correct(correct_number: str, expected: str) -> None:
 def test_mask_account_card_incorrect(incorrect_number: str, expected: str) -> None:
     """
     Функция тестирования некорректных входных данных и проверка ее устойчивости к ошибкам
+    в зависимости от типа входных данных (карта или счет)
     :param incorrect_number: str    :return: str
     """
     assert mask_account_card(incorrect_number) == expected
@@ -66,12 +69,11 @@ def test_get_date_correct(correct_date: str, expected: str) -> None:
 @pytest.mark.parametrize(
     "incorrect_date, expected",
     [
-        ("", ""),
-        ("2024-_3-11", "11.03.2024"),
-        ("20_24-05-12T02:26:19.671407", ""),
-        # ("", ""),
-        # ("", ""),
-        # ("", ""),
+        ("", "Некорректная дата"),
+        ("2024-_3-11", "Некорректная дата"),
+        ("20_24-05-12T02:26:19.671407", "Некорректная дата"),
+        ("2025-05-32T02:26:19.6714", "Некорректная дата"),
+        ("2025-13-22T02:26:19.671407", "Некорректная дата"),
     ],
 )
 def test_get_date_incorrect(incorrect_date: str, expected: str) -> None:
@@ -80,4 +82,8 @@ def test_get_date_incorrect(incorrect_date: str, expected: str) -> None:
     :param incorrect_date: str        :param expected: str
     :return: None
     """
-    assert get_date(incorrect_date) == expected
+    # assert get_date(incorrect_date) == expected
+    with pytest.raises(ValueError) as exc_info:
+        get_date(incorrect_date)
+
+    assert str(exc_info.value)
