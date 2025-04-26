@@ -40,25 +40,44 @@ def test_mask_account_card_correct(correct_number: str, expected: str) -> None:
 )
 def test_mask_account_card_incorrect(incorrect_number: str, expected: str) -> None:
     """
-    Функция тестирования корректного распознавания и маскировки
-    в зависимости от типа входных данных (карта или счет)
+    Функция тестирования некорректных входных данных и проверка ее устойчивости к ошибкам
     :param incorrect_number: str    :return: str
     """
     assert mask_account_card(incorrect_number) == expected
 
 
 @pytest.mark.parametrize(
-    "correct_number, expected",
+    "correct_date, expected",
     [
         ("2024-03-11T02:26:18.671407", "11.03.2024"),
         ("2024-05-12T02:26:19.671407", "12.05.2024"),
         ("2025-04-10T03:25:18.672807", "10.04.2025"),
     ],
 )
-def test_get_date_correct(correct_number: str, expected: str) -> None:
+def test_get_date_correct(correct_date: str, expected: str) -> None:
     """
     Функция тестирование правильности преобразования даты
-    :param correct_number: str    :param expected: str
+    :param correct_date: str    :param expected: str
     :return: None
     """
-    assert get_date(correct_number) == expected
+    assert get_date(correct_date) == expected
+
+
+@pytest.mark.parametrize(
+    "incorrect_date, expected",
+    [
+        ("", ""),
+        ("2024-_3-11", "11.03.2024"),
+        ("20_24-05-12T02:26:19.671407", ""),
+        # ("", ""),
+        # ("", ""),
+        # ("", ""),
+    ],
+)
+def test_get_date_incorrect(incorrect_date: str, expected: str) -> None:
+    """
+    Функция тестирования на различных входных форматах даты, включая граничные случаи и нестандартные строки с датами
+    :param incorrect_date: str        :param expected: str
+    :return: None
+    """
+    assert get_date(incorrect_date) == expected

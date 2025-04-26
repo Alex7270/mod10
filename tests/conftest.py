@@ -59,3 +59,8 @@ def incorrect_number() -> list[str]:
 @pytest.fixture
 def correct_date() -> list[str]:
     return ["2024-03-11T02:26:18.671407", "2024-05-12T02:26:19.671407", "2025-04-10T03:25:18.672807"]
+
+
+@pytest.fixture
+def incorrect_date() -> list[str]:
+    return ["", "2024-_3-11", "20_24-05-12T02:26:19.671407"]
