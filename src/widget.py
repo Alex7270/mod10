@@ -8,7 +8,7 @@ def mask_account_card(number: str) -> str:
     """
     Функция маскировки номера банковской карты или счета
     """
-    number_lst = re.findall(r'\w+', number)
+    number_lst = re.findall(r"\w+", number)
 
     if len(number_lst) not in [0, 1]:
 
@@ -27,4 +27,9 @@ def get_date(date: str) -> str:
     Функция преобразования формата даты
     """
     date_str = date[:10]
-    return datetime.strptime(date_str, "%Y-%m-%d").date().strftime("%d.%m.%Y")
+    try:
+        datetime.strptime(date_str, "%Y-%m-%d")
+    except Exception as e:
+        return f"Ошибка {e}"
+    else:
+        return datetime.strptime(date_str, "%Y-%m-%d").date().strftime("%d.%m.%Y")

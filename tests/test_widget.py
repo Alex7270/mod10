@@ -69,11 +69,11 @@ def test_get_date_correct(correct_date: str, expected: str) -> None:
 @pytest.mark.parametrize(
     "incorrect_date, expected",
     [
-        ("", "Некорректная дата"),
-        ("2024-_3-11", "Некорректная дата"),
-        ("20_24-05-12T02:26:19.671407", "Некорректная дата"),
-        ("2025-05-32T02:26:19.6714", "Некорректная дата"),
-        ("2025-13-22T02:26:19.671407", "Некорректная дата"),
+        ("", "Ошибка time data '' does not match format '%Y-%m-%d'"),
+        ("2024-_3-11", "Ошибка time data '2024-_3-11' does not match format '%Y-%m-%d'"),
+        ("20_24-05-12T02:26:19.671407", "Ошибка time data '20_24-05-1' does not match format '%Y-%m-%d'"),
+        ("2025-05-32T02:26:19.6714", 'Ошибка unconverted data remains: 2'),
+        ("2025-13-22T02:26:19.671407", "Ошибка time data '2025-13-22' does not match format '%Y-%m-%d'"),
     ],
 )
 def test_get_date_incorrect(incorrect_date: str, expected: str) -> None:
@@ -82,8 +82,4 @@ def test_get_date_incorrect(incorrect_date: str, expected: str) -> None:
     :param incorrect_date: str        :param expected: str
     :return: None
     """
-    # assert get_date(incorrect_date) == expected
-    with pytest.raises(ValueError) as exc_info:
-        get_date(incorrect_date)
-
-    assert str(exc_info.value)
+    assert get_date(incorrect_date) == expected
