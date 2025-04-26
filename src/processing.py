@@ -15,4 +15,4 @@ def sort_by_date(list_dict: list[dict[str, Any]], sort: bool = True) -> list[dic
     """
     Функция сортирует список по дате
     """
-    return sorted(list_dict, key=lambda x: x.get("date"), reverse=sort)
+    return sorted(list_dict, key=lambda x: x["date"], reverse=sort)
