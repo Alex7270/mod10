@@ -3,8 +3,6 @@ import pytest
 from src.widget import get_date, mask_account_card
 
 
-
-
 @pytest.mark.parametrize(
     "correct_number, expected",
     [
@@ -55,6 +53,9 @@ def test_mask_account_card_incorrect(incorrect_number: str, expected: str) -> No
         ("2024-03-11T02:26:18.671407", "11.03.2024"),
         ("2024-05-12T02:26:19.671407", "12.05.2024"),
         ("2025-04-10T03:25:18.672807", "10.04.2025"),
+        ("2025-12-31T03:25:18.672807", "31.12.2025"),
+        ("2025-01-01T03:25:18.672807", "01.01.2025"),
+        ("2024-02-29T03:25:18.672807", "29.02.2024"),
     ],
 )
 def test_get_date_correct(correct_date: str, expected: str) -> None:
@@ -72,8 +73,9 @@ def test_get_date_correct(correct_date: str, expected: str) -> None:
         ("", "Ошибка time data '' does not match format '%Y-%m-%d'"),
         ("2024-_3-11", "Ошибка time data '2024-_3-11' does not match format '%Y-%m-%d'"),
         ("20_24-05-12T02:26:19.671407", "Ошибка time data '20_24-05-1' does not match format '%Y-%m-%d'"),
-        ("2025-05-32T02:26:19.6714", 'Ошибка unconverted data remains: 2'),
+        ("2025-05-32T02:26:19.6714", "Ошибка unconverted data remains: 2"),
         ("2025-13-22T02:26:19.671407", "Ошибка time data '2025-13-22' does not match format '%Y-%m-%d'"),
+        ("2024-02-30T02:26:19.671407", "Ошибка day is out of range for month"),
     ],
 )
 def test_get_date_incorrect(incorrect_date: str, expected: str) -> None:
