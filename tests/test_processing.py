@@ -150,11 +150,21 @@ def test_sort_by_date_default(
                 {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
             ],
         ),
+        (
+            [
+                {"id": 41428829, "state": "EXECUTED", "date": "2019-12-03T18:35:29.512364"},
+                {"id": 939719570, "state": "EXECUTED", "date": "2018-02-30T02:08:58.425572"},
+                {"id": 594226727, "state": "CANCELED", "date": "2018-09-32T21:27:25.241689"},
+            ],
+            False,
+            "Ошибка формата даты",
+        ),
     ],
 )
-def test_sort_by_date(list_dict: list[dict[str, Any]], expected: list[dict[str, int | str]], sort: bool) -> None:
+def test_sort_by_date(list_dict: list[dict[str, Any]], expected: list[dict[str, Any]], sort: bool) -> None:
     """
-    Функция тестирования сортировки списка словарей по датам в порядке возрастания
+    Функция тестирования сортировки списка словарей по датам в порядке возрастания.
+    Тесты на работу функции с некорректными или нестандартными форматами дат.
     :param list_dict: list[dict[str, Any]      :param expected: expected: list[dict[str, int | str]
     :return: None
     """
