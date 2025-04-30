@@ -109,6 +109,31 @@ Visa Gold 5999 41** **** 6353
 
 ***
 
+### Тестирование
+
+- Установите через `Poetry` `Pytest`:  
+```commandline
+poetry add --group dev pytest
+``` 
+- Установите библиотеку `pytest-cov`:
+```commandline
+poetry add --group dev pytest-cov
+```
+- Чтобы запустить тесты с оценкой покрытия, можно воспользоваться следующими командами:  
+`pytest --cov`  — при активированном виртуальном окружении.  
+`poetry run pytest --cov` — через poetry.  
+`pytest --cov=src --cov-report=html` — чтобы сгенерировать отчет о покрытии в HTML-формате.   
+    где `src` — пакет c модулями, которые тестируем.   
+Отчёт будет сгенерирован в папке `htmlcov` и храниться в файле с названием `index.html`.
+
+- Oтчёт в HTML будет выглядеть следующим образом:  
+
+![img.png](img.png)  
+Произведены позитивные и негативные тесты для всех функций модулей `masks`, `widget` и `processing`.  
+Тестами покрыто 100% кода
+
+---
+
 ### Документация и ссылки
 При необходимости установите [PyCharm Community Edition
 ](https://www.jetbrains.com/pycharm/download/)
