@@ -2,10 +2,20 @@ from typing import Any, Generator
 
 
 def filter_by_currency(user_list: list[dict[str, Any]], currency: str) -> Generator[dict[str, Any], Any, None]:
-    """Функция поочередно выдает транзакции, где валюта операции соответствует заданной"""
+    """
+    Функция поочередно выдает транзакции, где валюта операции соответствует заданной
+    :param user_list: list[dict[str, Any]
+    :param currency: str
+    :return: Generator[dict[str, Any], Any, None]
+    """
+
     if len(user_list) == 0:
         print("Данные отсутствуют")
-    return (x for x in user_list if x.get("operationAmount", "").get("currency", "").get("code", "") == currency)
+    return (
+        x
+        for x in user_list
+        if x.get("operationAmount", "No data").get("currency", "No data").get("code", "No data") == currency
+    )
 
 
 transactions: list[dict[str, Any]] = [
@@ -61,7 +71,7 @@ def transaction_descriptions(user_list: list[dict[str, str]]) -> Generator[Any, 
     """
     Функция возвращает описание каждой операции по очереди
     :param user_list: list[dict[str, Any]]
-    :return: Generator[list[dict[str, Any]], Any, Any]
+    :return: Generator[Any, Any, Any]
     """
     if len(user_list) == 0:
         print("Данные отсутствуют")
