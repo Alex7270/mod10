@@ -1,3 +1,4 @@
+from src.generators import filter_by_currency, transactions
 from src.processing import filter_by_state, sort_by_date
 from src.widget import get_date, mask_account_card
 
@@ -42,6 +43,15 @@ def main() -> None:
             ]
         )
     )
+    print()
+    usd_transactions = filter_by_currency(transactions, "USD")
+    for i in usd_transactions:
+        print(i)
+    print()
+
+    rub_transactions = filter_by_currency(transactions, "RUB")
+    for i in rub_transactions:
+        print(i)
 
 
 if __name__ == "__main__":

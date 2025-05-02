@@ -2,12 +2,15 @@ from typing import Any, Generator
 
 
 def filter_by_currency(
-    my_list: list[dict[str, Any]], currency: str
-) -> Generator[dict[str, Any], Any, None]:
-    return (x for x in my_list if x.get("operationAmount").get("currency").get("name") == currency)
+        user_list: list[dict[str, Any]], currency: str
+) -> Generator[dict[str, Any], Any, Any] | str:
+    """Функция поочередно выдает транзакции, где валюта операции соответствует заданной"""
+    if len(user_list) == 0:
+        print('Данные отсутствуют')
+    return (x for x in user_list if x.get("operationAmount").get("currency").get("code") == currency)
 
 
-transactions = [
+transactions: list[dict[str, Any]] = [
     {
         "id": 939719570,
         "state": "EXECUTED",
@@ -54,8 +57,3 @@ transactions = [
         "to": "Счет 14211924144426031657",
     },
 ]
-
-usd_transactions = filter_by_currency(transactions, "USD")
-print(next(usd_transactions))
-print(next(usd_transactions))
-
