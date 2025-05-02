@@ -1,12 +1,10 @@
 from typing import Any, Generator
 
 
-def filter_by_currency(
-        user_list: list[dict[str, Any]], currency: str
-) -> Generator[dict[str, Any], Any, Any] | str:
+def filter_by_currency(user_list: list[dict[str, Any]], currency: str) -> Generator[dict[str, Any], Any, Any] | str:
     """Функция поочередно выдает транзакции, где валюта операции соответствует заданной"""
     if len(user_list) == 0:
-        print('Данные отсутствуют')
+        print("Данные отсутствуют")
     return (x for x in user_list if x.get("operationAmount").get("currency").get("code") == currency)
 
 
