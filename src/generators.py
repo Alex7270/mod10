@@ -75,7 +75,12 @@ def transaction_descriptions(user_list: list[dict[str, str]]) -> Generator[Any, 
     """
     if len(user_list) == 0:
         print("Данные отсутствуют")
-    return (x.get("description", "") for x in user_list)
+
+    else:
+        for x in user_list:
+            yield x.get("description", "")
+
+    # return (x.get("description", "") for x in user_list)
 
 
 def card_number_generator(start: int, stop: int) -> Generator[Any, Any, Any]:
