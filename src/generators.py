@@ -76,3 +76,15 @@ def transaction_descriptions(user_list: list[dict[str, str]]) -> Generator[Any, 
     if len(user_list) == 0:
         print("Данные отсутствуют")
     return (x.get("description", "") for x in user_list)
+
+
+def card_number_generator(start: int, stop: int) -> Generator[Any, Any, Any]:
+    """
+    Функция выдает номера банковских карт в формате XXXX XXXX XXXX XXXX
+    :param start: int
+    :param stop: int
+    :return: Generator[Any, Any, Any]
+    """
+    for i in range(start, stop + 1):
+        number = str.zfill(str(i), 16)
+        yield f"{number[:4]} {number[4:8]} {number[8:12]} {number[12:16]}"
