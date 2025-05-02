@@ -1,11 +1,11 @@
 from typing import Any, Generator
 
 
-def filter_by_currency(user_list: list[dict[str, Any]], currency: str) -> Generator[dict[str, Any], Any, Any] | str:
+def filter_by_currency(user_list: list[dict[str, Any]], currency: str) -> Generator[dict[str, Any], Any, None]:
     """Функция поочередно выдает транзакции, где валюта операции соответствует заданной"""
     if len(user_list) == 0:
         print("Данные отсутствуют")
-    return (x for x in user_list if x.get("operationAmount").get("currency").get("code") == currency)
+    return (x for x in user_list if x.get("operationAmount", "").get("currency", "").get("code", "") == currency)
 
 
 transactions: list[dict[str, Any]] = [
@@ -55,3 +55,14 @@ transactions: list[dict[str, Any]] = [
         "to": "Счет 14211924144426031657",
     },
 ]
+
+
+def transaction_descriptions(user_list: list[dict[str, str]]) -> Generator[Any, Any, Any]:
+    """
+    Функция возвращает описание каждой операции по очереди
+    :param user_list: list[dict[str, Any]]
+    :return: Generator[list[dict[str, Any]], Any, Any]
+    """
+    if len(user_list) == 0:
+        print("Данные отсутствуют")
+    return (x.get("description", "") for x in user_list)
