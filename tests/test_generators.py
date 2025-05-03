@@ -184,3 +184,16 @@ def test_filter_by_currency_rub(transactions: list[dict[str, Any]], currency: st
     """
     result = list(filter_by_currency(transactions, currency))
     assert result == expected
+
+
+def test_filter_by_currency_incorrect(transactions_incorrect: list[dict[str, Any]], currency: str, expected: dict[str, Any]) -> None:
+    """
+    Функция тестирования фильтрации транзакций c некорректными данными
+    :param transactions_incorrect: list[dict[str, Any]]
+    :param currency: str
+    :param expected: dict[str, Any]
+    :return: None
+    """
+    result = list(filter_by_currency(transactions_incorrect, currency))
+    assert result == expected
+
