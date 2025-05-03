@@ -1,21 +1,21 @@
 from typing import Any, Generator, Iterator
 
 
-def filter_by_currency(user_list: list[dict[str, Any]], currency: str) -> Iterator[dict[str, Any]]:
+def filter_by_currency(transactions: list[dict[str, Any]], currency: str) -> str | Iterator[dict[str, Any]]:
     """
     Функция поочередно выдает транзакции, где валюта операции соответствует заданной
-    :param user_list: list[dict[str, Any]
+    :param transactions: list[dict[str, Any]
     :param currency: str
     :return: Iterator[dict[str, Any]]
     """
 
-    if len(user_list) == 0:
+    if len(transactions) == 0:
         print("Данные отсутствуют")
     return iter(
         [
             x
-            for x in user_list
-            if x.get("operationAmount", "No data").get("currency", "No data").get("code", "No data") == currency
+            for x in transactions
+            if x.get("operationAmount", {}).get("currency", {}).get("code", {}) == currency
         ]
     )
 

@@ -137,7 +137,7 @@ def test_sort_by_date() -> tuple[list[dict[str, int | str]], bool, list[dict[str
 
 
 @pytest.fixture
-def currency_correct() -> list[dict[str, Any]]:
+def transactions() -> list[dict[str, Any]]:
     return [
         {
             "id": 939719570,
@@ -184,4 +184,19 @@ def currency_correct() -> list[dict[str, Any]]:
             "from": "Visa Platinum 1246377376343588",
             "to": "Счет 14211924144426031657",
         },
+    ]
+
+@pytest.fixture
+def transactions_incorrect() -> list[dict[str, Any]]:
+    return [
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            "operationAmount": {"amount": "67314.70", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод организации",
+            "from": "Visa Platinum 1246377376343588",
+            "to": "Счет 14211924144426031657",
+        },
+
     ]
