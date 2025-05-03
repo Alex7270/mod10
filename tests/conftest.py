@@ -186,6 +186,7 @@ def transactions() -> list[dict[str, Any]]:
         },
     ]
 
+
 @pytest.fixture
 def transactions_incorrect() -> list[dict[str, Any]]:
     return [
@@ -194,6 +195,16 @@ def transactions_incorrect() -> list[dict[str, Any]]:
             "state": "CANCELED",
             "date": "2018-09-12T21:27:25.241689",
             "operationAmount": {"amount": "67314.70", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод организации",
+            "from": "Visa Platinum 1246377376343588",
+            "to": "Счет 14211924144426031657",
+        },
+        {},
+        {
+            "id": 594226727,
+            "state": "CANCELED",
+            "date": "2018-09-12T21:27:25.241689",
+            "perationAmount": {"amount": "67314.70", "currency": {"name": "USD", "code": "USD"}},
             "description": "Перевод организации",
             "from": "Visa Platinum 1246377376343588",
             "to": "Счет 14211924144426031657",

@@ -89,7 +89,9 @@ from src.generators import filter_by_currency
         ),
     ],
 )
-def test_filter_by_currency_usd(transactions: list[dict[str, Any]], currency: str, expected: dict[str, Any]) -> None:
+def test_filter_by_currency_usd(
+    transactions: list[dict[str, Any]], currency: str, expected: list[dict[str, Any]]
+) -> None:
     """
     Функция тестирования фильтрации транзакций по заданной валюте 'USD'
     :param transactions: list[dict[str, Any]]
@@ -175,7 +177,9 @@ def test_filter_by_currency_usd(transactions: list[dict[str, Any]], currency: st
         ),
     ],
 )
-def test_filter_by_currency_rub(transactions: list[dict[str, Any]], currency: str, expected: dict[str, Any]) -> None:
+def test_filter_by_currency_rub(
+    transactions: list[dict[str, Any]], currency: str, expected: list[dict[str, Any]]
+) -> None:
     """
     Функция тестирования фильтрации транзакций по заданной валюте 'RUB'
     :param transactions: list[dict[str, Any]]
@@ -186,7 +190,49 @@ def test_filter_by_currency_rub(transactions: list[dict[str, Any]], currency: st
     assert result == expected
 
 
-def test_filter_by_currency_incorrect(transactions_incorrect: list[dict[str, Any]], currency: str, expected: dict[str, Any]) -> None:
+@pytest.mark.parametrize(
+    "transactions_incorrect, currency, expected",
+    [
+        (
+            [
+                {
+                    "id": 594226727,
+                    "state": "CANCELED",
+                    "date": "2018-09-12T21:27:25.241689",
+                    "operationAmount": {"amount": "67314.70", "currency": {"name": "USD", "code": "USD"}},
+                    "description": "Перевод организации",
+                    "from": "Visa Platinum 1246377376343588",
+                    "to": "Счет 14211924144426031657",
+                },
+            ],
+            "EUR",
+            [],
+        ),
+        (
+            [{}],
+            "USD",
+            [],
+        ),
+        (
+            [
+                {
+                    "id": 594226727,
+                    "state": "CANCELED",
+                    "date": "2018-09-12T21:27:25.241689",
+                    "operationAmount": {"amount": "67314.70", "urrency": {"name": "USD", "code": "USD"}},
+                    "description": "Перевод организации",
+                    "from": "Visa Platinum 1246377376343588",
+                    "to": "Счет 14211924144426031657",
+                },
+            ],
+            "USD",
+            [],
+        ),
+    ],
+)
+def test_filter_by_currency_incorrect(
+    transactions_incorrect: list[dict[str, Any]], currency: str, expected: list[dict[str, Any]]
+) -> None:
     """
     Функция тестирования фильтрации транзакций c некорректными данными
     :param transactions_incorrect: list[dict[str, Any]]
@@ -196,4 +242,3 @@ def test_filter_by_currency_incorrect(transactions_incorrect: list[dict[str, Any
     """
     result = list(filter_by_currency(transactions_incorrect, currency))
     assert result == expected
-
