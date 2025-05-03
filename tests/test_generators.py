@@ -175,42 +175,12 @@ def test_filter_by_currency_usd(transactions: list[dict[str, Any]], currency: st
         ),
     ],
 )
-# def test_filter_by_currency_rub(transactions: list[dict[str, Any]], currency: str, expected: dict[str, Any]) -> None:
-#     """
-#     Функция тестирования фильтрации транзакций по заданной валюте 'RUB'
-#     :param transactions: list[dict[str, Any]]
-#     :param currency: str
-#     :return: None
-#     """
-#     result = list(filter_by_currency(transactions, currency))
-#     assert result == expected
-#
-#
-# @pytest.mark.parametrize(
-#     "transactions_incorrect, currency, expected",
-#     [
-#         (
-#            [
-#
-#            ] {
-#                 "id": 939719570,
-#                 "state": "EXECUTED",
-#                 "date": "2018-06-30T02:08:58.425572",
-#                 "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
-#                 "description": "Перевод организации",
-#                 "from": "Счет 75106830613657916952",
-#                 "to": "Счет 11776614605963066702",
-#             }, "USD", [],
-#
-#         ),
-#     ],
-# )
-# def test_filter_by_currency_incorrect(transactions_incorrect: list[dict[str, Any]], currency: str, expected: dict[str, Any]) -> None:
-#     """
-#     Функция тестирования фильтрации транзакций при несоответствующих данныч
-#     :param transactions_incorrect: list[dict[str, Any]]
-#     :param currency: str
-#     :return: None
-#     """
-#     result = list(filter_by_currency(transactions_incorrect, currency))
-#     assert result == expected
+def test_filter_by_currency_rub(transactions: list[dict[str, Any]], currency: str, expected: dict[str, Any]) -> None:
+    """
+    Функция тестирования фильтрации транзакций по заданной валюте 'RUB'
+    :param transactions: list[dict[str, Any]]
+    :param currency: str
+    :return: None
+    """
+    result = list(filter_by_currency(transactions, currency))
+    assert result == expected
