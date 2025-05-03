@@ -6,9 +6,10 @@ from src.generators import filter_by_currency
 
 
 @pytest.mark.parametrize(
-    "currency_correct, currency, expected",
+    "transactions, currency, expected",
     [
         (
+            [
                 {
                     "id": 939719570,
                     "state": "EXECUTED",
@@ -18,18 +19,6 @@ from src.generators import filter_by_currency
                     "from": "Счет 75106830613657916952",
                     "to": "Счет 11776614605963066702",
                 },
-                "USD",
-                {
-                    "id": 939719570,
-                    "state": "EXECUTED",
-                    "date": "2018-06-30T02:08:58.425572",
-                    "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
-                    "description": "Перевод организации",
-                    "from": "Счет 75106830613657916952",
-                    "to": "Счет 11776614605963066702",
-                }
-        ),
-        (
                 {
                     "id": 142264268,
                     "state": "EXECUTED",
@@ -39,21 +28,6 @@ from src.generators import filter_by_currency
                     "from": "Счет 19708645243227258542",
                     "to": "Счет 75651667383060284188",
                 },
-                "USD",
-                {
-                    "id": 142264268,
-                    "state": "EXECUTED",
-                    "date": "2019-04-04T23:20:05.206878",
-                    "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
-                    "description": "Перевод со счета на счет",
-                    "from": "Счет 19708645243227258542",
-                    "to": "Счет 75651667383060284188",
-                }
-        )
-
-                 {
-
-                 }
                 {
                     "id": 873106923,
                     "state": "EXECUTED",
@@ -81,7 +55,9 @@ from src.generators import filter_by_currency
                     "from": "Visa Platinum 1246377376343588",
                     "to": "Счет 14211924144426031657",
                 },
-                "USD",
+            ],
+            "USD",
+            [
                 {
                     "id": 939719570,
                     "state": "EXECUTED",
@@ -109,15 +85,18 @@ from src.generators import filter_by_currency
                     "from": "Visa Classic 6831982476737658",
                     "to": "Visa Platinum 8990922113665229",
                 },
+            ],
         ),
     ],
 )
-def test_filter_by_currency_correct(currency_correct: list[dict[str, Any]], currency: str,
-                                    expected: dict[str, Any]) -> None:
+def test_filter_by_currency_correct(
+    transactions: list[dict[str, Any]], currency: str, expected: dict[str, Any]
+) -> None:
     """
     Функция тестирования фильтрации транзакций по заданной валюте
-    :param currency_correct: list[dict[str, Any]]
+    :param transactions: list[dict[str, Any]]
     :param currency: str
-    :return:
+    :return: None
     """
-    assert filter_by_currency(currency_correct, currency) == expected
+    result = list(filter_by_currency(transactions, currency))
+    assert result == expected

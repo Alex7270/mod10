@@ -1,20 +1,22 @@
-from typing import Any, Generator
+from typing import Any, Generator, Iterator
 
 
-def filter_by_currency(user_list: list[dict[str, Any]], currency: str) -> Generator[dict[str, Any], Any, None]:
+def filter_by_currency(user_list: list[dict[str, Any]], currency: str) -> Iterator[dict[str, Any]]:
     """
     Функция поочередно выдает транзакции, где валюта операции соответствует заданной
     :param user_list: list[dict[str, Any]
     :param currency: str
-    :return: Generator[dict[str, Any], Any, None]
+    :return: Iterator[dict[str, Any]]
     """
 
     if len(user_list) == 0:
         print("Данные отсутствуют")
-    return (
-        x
-        for x in user_list
-        if x.get("operationAmount", "No data").get("currency", "No data").get("code", "No data") == currency
+    return iter(
+        [
+            x
+            for x in user_list
+            if x.get("operationAmount", "No data").get("currency", "No data").get("code", "No data") == currency
+        ]
     )
 
 
