@@ -65,17 +65,17 @@ transactions: list[dict[str, Any]] = [
 ]
 
 
-def transaction_descriptions(user_list: list[dict[str, str]]) -> Generator[Any, Any, Any]:
+def transaction_descriptions(transactions: list[dict[str, str]]) -> Generator[Any, Any, Any]:
     """
     Функция возвращает описание каждой операции по очереди
-    :param user_list: list[dict[str, Any]]
+    :param transactions: list[dict[str, Any]]
     :return: Generator[Any, Any, Any]
     """
-    if len(user_list) == 0:
+    if len(transactions) in [0, 1]:
         print("Данные отсутствуют")
 
     else:
-        for x in user_list:
+        for x in transactions:
             yield x.get("description", "")
 
     # return (x.get("description", "") for x in user_list)
