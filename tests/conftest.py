@@ -199,7 +199,7 @@ def transactions_incorrect() -> list[dict[str, Any]]:
             "from": "Visa Platinum 1246377376343588",
             "to": "Счет 14211924144426031657",
         },
-        [],
+        {},
         {
             "id": 594226727,
             "state": "CANCELED",
@@ -217,5 +217,29 @@ def transactions_incorrect() -> list[dict[str, Any]]:
             "description": "Перевод организации",
             "from": "Visa Platinum 1246377376343588",
             "to": "Счет 14211924144426031657",
+        },
+    ]
+
+
+@pytest.fixture
+def description_incorrect() -> list[dict[str, Any]]:
+    return [
+        {
+            "id": 142264268,
+            "state": "EXECUTED",
+            "date": "2019-04-04T23:20:05.206878",
+            "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+            "escription": "Перевод со счета на счет",
+            "from": "Счет 19708645243227258542",
+            "to": "Счет 75651667383060284188",
+        },
+        {
+            "id": 142264268,
+            "state": "EXECUTED",
+            "date": "2019-04-04T23:20:05.206878",
+            "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+            "description": "",
+            "from": "Счет 19708645243227258542",
+            "to": "Счет 75651667383060284188",
         },
     ]

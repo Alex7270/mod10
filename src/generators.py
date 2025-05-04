@@ -76,7 +76,8 @@ def transaction_descriptions(transactions: list[dict[str, str]]) -> Generator[An
 
     else:
         for x in transactions:
-            yield x.get("description", "")
+            yield x.get("description", "No data")
+
 
 def card_number_generator(start: int, stop: int) -> Generator[Any, Any, Any]:
     """

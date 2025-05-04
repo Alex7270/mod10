@@ -273,7 +273,8 @@ def test_filter_by_currency_incorrect(
                     "from": "Счет 75106830613657916952",
                     "to": "Счет 11776614605963066702",
                 }
-            ], "Перевод организации",
+            ],
+            "Перевод организации",
         ),
         (
             [
@@ -286,7 +287,8 @@ def test_filter_by_currency_incorrect(
                     "from": "Счет 19708645243227258542",
                     "to": "Счет 75651667383060284188",
                 },
-            ], "Перевод со счета на счет",
+            ],
+            "Перевод со счета на счет",
         ),
         (
             [
@@ -299,7 +301,8 @@ def test_filter_by_currency_incorrect(
                     "from": "Счет 44812258784861134719",
                     "to": "Счет 74489636417521191160",
                 },
-            ], "Перевод со счета на счет",
+            ],
+            "Перевод со счета на счет",
         ),
         (
             [
@@ -312,7 +315,8 @@ def test_filter_by_currency_incorrect(
                     "from": "Visa Classic 6831982476737658",
                     "to": "Visa Platinum 8990922113665229",
                 },
-            ], "Перевод с карты на карту",
+            ],
+            "Перевод с карты на карту",
         ),
         (
             [
@@ -325,7 +329,8 @@ def test_filter_by_currency_incorrect(
                     "from": "Visa Platinum 1246377376343588",
                     "to": "Счет 14211924144426031657",
                 },
-            ], "Перевод организации",
+            ],
+            "Перевод организации",
         ),
     ],
 )
@@ -337,5 +342,50 @@ def test_transaction_descriptions(transactions: list[dict[str, Any]], expected: 
     :return: None
     """
     descriptions = transaction_descriptions(transactions)
+    for i in descriptions:
+        assert i == expected
+
+
+@pytest.mark.parametrize(
+    "description_incorrect, expected",
+    [
+        (
+            [
+                {
+                    "id": 142264268,
+                    "state": "EXECUTED",
+                    "date": "2019-04-04T23:20:05.206878",
+                    "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+                    "escription": "Перевод со счета на счет",
+                    "from": "Счет 19708645243227258542",
+                    "to": "Счет 75651667383060284188",
+                },
+            ],
+            "No data",
+        ),
+        (
+            [
+                {
+                    "id": 142264268,
+                    "state": "EXECUTED",
+                    "date": "2019-04-04T23:20:05.206878",
+                    "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+                    "description": "",
+                    "from": "Счет 19708645243227258542",
+                    "to": "Счет 75651667383060284188",
+                },
+            ],
+            "",
+        ),
+    ],
+)
+def test_transaction_descriptions_incorrect(description_incorrect: list[dict[str, Any]], expected: str) -> None:
+    """
+    Функция тестирования транзакций c некорректными данными description
+    :param description_incorrect: list[dict[str, Any]]
+    :param expected: str
+    :return: None
+    """
+    descriptions = transaction_descriptions(description_incorrect)
     for i in descriptions:
         assert i == expected
