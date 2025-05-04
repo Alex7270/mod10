@@ -199,7 +199,7 @@ def transactions_incorrect() -> list[dict[str, Any]]:
             "from": "Visa Platinum 1246377376343588",
             "to": "Счет 14211924144426031657",
         },
-        {},
+        [],
         {
             "id": 594226727,
             "state": "CANCELED",

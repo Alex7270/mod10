@@ -9,7 +9,7 @@ def filter_by_currency(transactions: list[dict[str, Any]], currency: str) -> str
     :return: Iterator[dict[str, Any]]
     """
 
-    if len(transactions) in [0, 1]:
+    if len(transactions) == 0:
         print("Данные отсутствуют")
     return iter(
         [x for x in transactions if x.get("operationAmount", {}).get("currency", {}).get("code", {}) == currency]
@@ -71,15 +71,12 @@ def transaction_descriptions(transactions: list[dict[str, str]]) -> Generator[An
     :param transactions: list[dict[str, Any]]
     :return: Generator[Any, Any, Any]
     """
-    if len(transactions) in [0, 1]:
+    if len(transactions) == 0:
         print("Данные отсутствуют")
 
     else:
         for x in transactions:
             yield x.get("description", "")
-
-    # return (x.get("description", "") for x in user_list)
-
 
 def card_number_generator(start: int, stop: int) -> Generator[Any, Any, Any]:
     """
