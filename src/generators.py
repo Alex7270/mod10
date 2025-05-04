@@ -9,8 +9,8 @@ def filter_by_currency(transactions: list[dict[str, Any]], currency: str) -> str
     :return: Iterator[dict[str, Any]]
     """
 
-    if len(transactions) == 0:
-        return "Данные отсутствуют"
+    if len(transactions) in [0, 1]:
+        print("Данные отсутствуют")
     return iter(
         [x for x in transactions if x.get("operationAmount", {}).get("currency", {}).get("code", {}) == currency]
     )
