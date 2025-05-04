@@ -377,6 +377,7 @@ def test_transaction_descriptions(transactions: list[dict[str, Any]], expected: 
             ],
             "",
         ),
+        ([], []),
     ],
 )
 def test_transaction_descriptions_incorrect(description_incorrect: list[dict[str, Any]], expected: str) -> None:
