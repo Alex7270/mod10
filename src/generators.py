@@ -92,5 +92,8 @@ def card_number_generator(start: int, stop: int) -> Generator[Any, Any, Any]:
     :return: Generator[Any, Any, Any]
     """
     for i in range(start, stop + 1):
-        number = str.zfill(str(i), 16)
-        yield f"{number[:4]} {number[4:8]} {number[8:12]} {number[12:16]}"
+        if i < 10**16:
+            number = str.zfill(str(i), 16)
+            yield f"{number[:4]} {number[4:8]} {number[8:12]} {number[12:16]}"
+        else:
+            break

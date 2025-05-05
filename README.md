@@ -187,8 +187,8 @@ poetry add --group dev pytest-cov
 
 - Oтчёт в HTML будет выглядеть следующим образом:
 
-![img.png](img.png)  
-Произведены позитивные и негативные тесты для всех функций модулей `masks`, `widget` и `processing`.  
+![img_1.png](img_1.png)    
+Произведены позитивные и негативные тесты для всех функций модулей `masks`, `widget`,`processing`,`generators`.  
 Тестами покрыто 100% кода
 
 ---

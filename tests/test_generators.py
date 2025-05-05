@@ -2,7 +2,7 @@ from typing import Any
 
 import pytest
 
-from src.generators import filter_by_currency, transaction_descriptions
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 
 @pytest.mark.parametrize(
@@ -390,3 +390,38 @@ def test_transaction_descriptions_incorrect(description_incorrect: list[dict[str
     descriptions = transaction_descriptions(description_incorrect)
     for i in descriptions:
         assert i == expected
+
+
+@pytest.mark.parametrize(
+    "start, stop, expected_number",
+    [
+        (
+            1,
+            5,
+            [
+                "0000 0000 0000 0001",
+                "0000 0000 0000 0002",
+                "0000 0000 0000 0003",
+                "0000 0000 0000 0004",
+                "0000 0000 0000 0005",
+            ],
+        ),
+        (
+            9999999999999995,
+            10**16,
+            [
+                "9999 9999 9999 9995",
+                "9999 9999 9999 9996",
+                "9999 9999 9999 9997",
+                "9999 9999 9999 9998",
+                "9999 9999 9999 9999",
+            ],
+        ),
+    ],
+)
+def test_card_number_generator(start: int, stop: int, expected_number: list[str]) -> None:
+    """
+    Функция тестирования генератора номеров банковских карт в формате XXXX XXXX XXXX XXXX
+    """
+    card_number = list(card_number_generator(start, stop))
+    assert card_number == expected_number
