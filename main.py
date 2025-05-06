@@ -1,3 +1,4 @@
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions, transactions
 from src.processing import filter_by_state, sort_by_date
 from src.widget import get_date, mask_account_card
 
@@ -42,6 +43,29 @@ def main() -> None:
             ]
         )
     )
+
+    print()
+
+    usd_transactions = filter_by_currency(transactions, "USD")
+    for i in usd_transactions:
+        print(i)
+
+    print()
+
+    rub_transactions = filter_by_currency(transactions, "RUB")
+    for i in rub_transactions:
+        print(i)
+
+    print()
+
+    descriptions = transaction_descriptions(transactions)
+    for i in descriptions:
+        print(i)
+
+    print()
+
+    for card_number in card_number_generator(1, 5):
+        print(card_number)
 
 
 if __name__ == "__main__":
