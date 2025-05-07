@@ -69,7 +69,7 @@ def test_filter_by_currency_correct(
     transactions: list[dict[str, Any]], currency: str, expected: list[dict[str, Any]]
 ) -> None:
     """
-    Функция тестирования фильтрации транзакций по заданной валюте 'USD'
+    Функция тестирования фильтрации транзакций по заданной валюте
     :param transactions: list[dict[str, Any]]
     :param currency: str
     :return: None
