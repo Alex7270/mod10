@@ -1,12 +1,12 @@
 from datetime import datetime
 from functools import wraps
-from typing import Any, Generator
+from typing import Any, Callable
 
 
-def log(filename: str = "mylog.txt"):
-    def my_decorator(func):
+def log(filename: str = "mylog.txt") -> Callable[[Any], Callable[[int, int], Any]]:
+    def my_decorator(func: Any) -> Callable[[int, int], Any]:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: int, **kwargs: int) -> Any:
             print(f"Начало работы функции {datetime.now()}")
             print(f"Имя функции {func.__name__}")
             print(f"Аргументы декоратора: {filename}")
