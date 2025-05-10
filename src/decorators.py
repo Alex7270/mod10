@@ -12,7 +12,7 @@ def log(filename: str | None = None) -> Callable[[Any], Callable[[int, int], Any
                 result = func(*args, **kwargs)
                 datetime.now()
                 message = (
-                    f"Начало работы функции: {datetime.now()}\n\n"
+                    f"\nНачало работы функции: {datetime.now()}\n\n"
                     f"Имя функции: {func.__name__}\n{func.__doc__}\n"
                     f"Аргументы функции args: {args}; kwargs: {kwargs}\n\n"
                     f"Окончание работы функции: {datetime.now()}\n\nРезультат работы функции: OK\n"
@@ -21,13 +21,14 @@ def log(filename: str | None = None) -> Callable[[Any], Callable[[int, int], Any
 
                     with open("data/" + filename, "a", encoding="utf-8") as file:
                         file.write(message)
+
                 else:
                     print(message)
 
                 return result
 
             except Exception as e:
-                message = f"{func.__name__} error: {type(e).__name__}. Inputs: {args}, {kwargs}"
+                message = f"\n{func.__name__} error: {type(e).__name__}. Inputs: {args}, {kwargs}\n"
                 if filename:
                     with open("data/" + filename, "a") as file:
                         file.write(message)
