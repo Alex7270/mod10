@@ -34,7 +34,7 @@ def log(filename: str | None = None) -> Callable[[Any], Callable[[int, int], Any
                         file.write(message)
                 else:
                     print(message)
-            raise
+                raise
 
         return wrapper
 
