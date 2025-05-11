@@ -15,7 +15,7 @@ def log(filename: str | None = None) -> Callable[[Any], Callable[[int, int], Any
                     f"\nНачало работы функции: {datetime.now()}\n\n"
                     f"Имя функции: {func.__name__}\n{func.__doc__}\n"
                     f"Аргументы функции args: {args}; kwargs: {kwargs}\n\n"
-                    f"Окончание работы функции: {datetime.now()}\n\nРезультат работы функции: OK\n {result}\n"
+                    f"Окончание работы функции: {datetime.now()}\n\nРезультат работы функции ОК: \n {result}\n"
                 )
                 if filename:
 
