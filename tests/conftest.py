@@ -108,3 +108,8 @@ def expected_str() -> str | None:
         f"Результат работы функции ОК: \n5\n"
         f""
     )
+
+
+@pytest.fixture
+def expected_error() -> str:
+    return f"\n{datetime.now().strftime('%Y-%m-%d %X')} add_numbers error: TypeError. Inputs: (2,), {{}}\n" f""

@@ -1,3 +1,4 @@
+import pytest
 import os
 from typing import Any
 
@@ -43,3 +44,23 @@ def test_log_param(expected_str: str) -> None:
     finally:
         # Удаляем временный файл
         os.remove("data/mylog2.txt")
+
+
+def test_log_error(capsys: Any, expected_error: str) -> None:
+    """
+    Функция тестирования декоратора log при отсутствии параметров и вывода ошибки в консоль
+    :param capsys: Any
+    :param expected_error: str
+    :return: None
+    """
+
+    @log()
+    def add_numbers(a: float, b: float) -> float:
+        return a + b
+
+    with pytest.raises(Exception):
+        add_numbers(
+            2,
+        )
+    captured = capsys.readouterr()
+    assert expected_error in captured.out
