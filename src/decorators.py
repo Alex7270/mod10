@@ -8,9 +8,9 @@ def log(filename: str | None = None) -> Callable[[Any], Callable[[int, int], Any
         @wraps(func)
         def wrapper(*args: int, **kwargs: int) -> Any:
             try:
-                datetime.now()
+                datetime.now().strftime("%Y-%m-%d %X")
                 result = func(*args, **kwargs)
-                datetime.now()
+                datetime.now().strftime("%Y-%m-%d %X")
                 message = (
                     f"\nНачало работы функции: {datetime.now().strftime('%Y-%m-%d %X')}\n\n"
                     f"Имя функции: {func.__name__}\n{func.__doc__}\n"
