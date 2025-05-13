@@ -7,6 +7,9 @@ from src.decorators import log
 def test_log(capsys: Any, expected_str: str) -> None:
     """
     Функция тестирования декоратора log при отсутствии параметров и вывода результатов в консоль
+    :param capsys: Any
+    :param expected_str: str
+    :return: None
     """
 
     @log()
@@ -21,6 +24,8 @@ def test_log(capsys: Any, expected_str: str) -> None:
 def test_log_param(expected_str: str) -> None:
     """
     Функция тестирования декоратора log при наличии параметров и записи результатов в файл
+    :param expected_str: str
+    :return: None
     """
 
     @log(filename="mylog2.txt")
