@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Any
 
 import pytest
@@ -95,3 +96,15 @@ def transactions_incorrect() -> list[dict[Any, Any]]:
             "to": "Счет 14211924144426031657",
         },
     ]
+
+
+@pytest.fixture
+def expected_str() -> str | None:
+    return (
+        f"\nНачало работы функции: {datetime.now().strftime('%Y-%m-%d %X')}\n\n"
+        f"Имя функции: add_numbers\nNone\n"
+        f"Аргументы функции args: (2, 3); kwargs: {{}}\n\n"
+        f"Окончание работы функции: {datetime.now().strftime('%Y-%m-%d %X')}\n\n"
+        f"Результат работы функции ОК: \n5\n"
+        f""
+    )
