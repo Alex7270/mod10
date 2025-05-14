@@ -28,7 +28,7 @@ def log(filename: str | None = None) -> Callable[[Any], Callable[[int, int], Any
 
                 return result
 
-            except Exception as e:
+            except (TypeError, ValueError) as e:
                 message = (
                     f"\n{datetime.now().strftime('%Y-%m-%d %X')}"
                     f" {func.__name__} error: {type(e).__name__}. Inputs: {args}, {kwargs}\n"
@@ -38,7 +38,6 @@ def log(filename: str | None = None) -> Callable[[Any], Callable[[int, int], Any
                         file.write(message)
                 else:
                     print(message)
-                raise
 
         return wrapper
 
