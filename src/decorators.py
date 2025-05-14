@@ -4,6 +4,12 @@ from typing import Any, Callable
 
 
 def log(filename: str | None = None) -> Callable[[Any], Callable[[int, int], Any]]:
+    """
+    Декоратор ведет лог работы функции и ее результат, а также возникшие ошибки как в файл, так и в консоль.
+    :param filename: str | None
+    :return: Callable[[Any], Callable[[int, int], Any]]
+    """
+
     def my_decorator(func: Any) -> Callable[[int, int], Any]:
         @wraps(func)
         def wrapper(*args: int, **kwargs: int) -> Any:
@@ -11,13 +17,7 @@ def log(filename: str | None = None) -> Callable[[Any], Callable[[int, int], Any
                 datetime.now().strftime("%Y-%m-%d %X")
                 result = func(*args, **kwargs)
                 datetime.now().strftime("%Y-%m-%d %X")
-                message = (
-                    f"\nНачало работы функции: {datetime.now().strftime('%Y-%m-%d %X')}\n\n"
-                    f"Имя функции: {func.__name__}\n{func.__doc__}\n"
-                    f"Аргументы функции args: {args}; kwargs: {kwargs}\n\n"
-                    f"Окончание работы функции: {datetime.now().strftime('%Y-%m-%d %X')}\n\n"
-                    f"Результат работы функции ОК: \n{result}\n"
-                )
+                message = f"\n{datetime.now().strftime('%Y-%m-%d %X')} {func.__name__} ОК: {result}"
                 if filename:
 
                     with open("data/" + filename, "a", encoding="utf-8") as file:

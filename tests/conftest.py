@@ -100,14 +100,7 @@ def transactions_incorrect() -> list[dict[Any, Any]]:
 
 @pytest.fixture
 def expected_str() -> str | None:
-    return (
-        f"\nНачало работы функции: {datetime.now().strftime('%Y-%m-%d %X')}\n\n"
-        f"Имя функции: add_numbers\nNone\n"
-        f"Аргументы функции args: (2, 3); kwargs: {{}}\n\n"
-        f"Окончание работы функции: {datetime.now().strftime('%Y-%m-%d %X')}\n\n"
-        f"Результат работы функции ОК: \n5\n"
-        f""
-    )
+    return f"\n{datetime.now().strftime('%Y-%m-%d %X')} add_numbers ОК: 5"
 
 
 @pytest.fixture
