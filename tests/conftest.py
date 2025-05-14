@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Any
 
 import pytest
@@ -95,3 +96,13 @@ def transactions_incorrect() -> list[dict[Any, Any]]:
             "to": "Счет 14211924144426031657",
         },
     ]
+
+
+@pytest.fixture
+def expected_str() -> str | None:
+    return f"\n{datetime.now().strftime('%Y-%m-%d %X')} add_numbers ОК: 5"
+
+
+@pytest.fixture
+def expected_error() -> str:
+    return f"\n{datetime.now().strftime('%Y-%m-%d %X')} add_numbers error: TypeError. Inputs: (2,), {{}}\n"
