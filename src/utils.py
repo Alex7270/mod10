@@ -12,5 +12,5 @@ def get_transaction(path: str) -> list[dict[str, Any]] | Any:
         with open(path, encoding="utf-8") as f:
             data_list = json.load(f)
             return data_list
-    except Exception:
+    except (FileNotFoundError, json.JSONDecodeError):
         return []
