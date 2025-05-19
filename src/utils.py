@@ -11,6 +11,9 @@ def get_transaction(path: str) -> list[dict[str, Any]] | Any:
     try:
         with open(path, encoding="utf-8") as f:
             data_list = json.load(f)
-            return data_list
+            if len(data_list) in [0, 1] or not data_list[0]:
+                return []
+            else:
+                return data_list
     except (FileNotFoundError, json.JSONDecodeError):
         return []
