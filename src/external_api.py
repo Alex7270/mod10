@@ -1,4 +1,3 @@
-import json
 import os
 from typing import Any
 
@@ -37,9 +36,12 @@ def get_convert_amount_rub(transaction: dict[str, Any]) -> Any | None:
         response = requests.request("GET", url, headers=headers, params=payload)
 
         status_code = response.status_code
-        result = response.text
+        result = response.json()
 
         if status_code == 200:
-            return json.loads(result).get("result")
+            return result.get("result")
         return "Ошибка передачи данных"
     return None
+
+
+print(get_convert_amount_rub(transactions_lst[1]))
