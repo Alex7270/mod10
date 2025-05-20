@@ -32,15 +32,17 @@ def get_convert_amount_rub(transaction: dict[str, Any]) -> Any | None:
         payload = {"amount": amount, "from": currency, "to": "RUB"}
 
         headers = {"apikey": api_key}
+        try:
+            response = requests.request("GET", url, headers=headers, params=payload)
 
-        response = requests.request("GET", url, headers=headers, params=payload)
+            status_code = response.status_code
+            result = response.json()
 
-        status_code = response.status_code
-        result = response.json()
-
-        if status_code == 200:
-            return result.get("result")
-        return "Ошибка передачи данных"
+            if status_code == 200:
+                return result.get("result")
+            return "Ошибка передачи данных"
+        except requests.exceptions.RequestException as e:
+            print(f"Error: {e}")
     return None
 
 
