@@ -4,7 +4,7 @@ from typing import Any
 import requests
 from dotenv import load_dotenv
 
-from src.utils import get_transaction
+from utils import get_transaction
 
 transactions_lst = get_transaction("data/operations.json")
 
@@ -44,6 +44,3 @@ def get_convert_amount_rub(transaction: dict[str, Any]) -> Any | None:
         except requests.exceptions.RequestException as e:
             print(f"Error: {e}")
     return None
-
-
-print(get_convert_amount_rub(transactions_lst[1]))
