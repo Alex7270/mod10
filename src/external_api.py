@@ -4,9 +4,11 @@ from typing import Any
 import requests
 from dotenv import load_dotenv
 
-from utils import get_transaction
+from src.utils import get_transaction
 
 transactions_lst = get_transaction("data/operations.json")
+transaction_usd = transactions_lst[1]
+transaction_rub = transactions_lst[0]
 
 
 def get_convert_amount_rub(transaction: dict[str, Any]) -> Any | None:
@@ -25,22 +27,16 @@ def get_convert_amount_rub(transaction: dict[str, Any]) -> Any | None:
     api_key = os.getenv("API_KEY")
 
     if currency == "RUB":
-        return amount
+        return float(amount)
     elif currency in ["USD", "EUR"]:
         url = "https://api.apilayer.com/exchangerates_data/convert"
-
         payload = {"amount": amount, "from": currency, "to": "RUB"}
-
         headers = {"apikey": api_key}
         try:
-            response = requests.request("GET", url, headers=headers, params=payload)
-
-            status_code = response.status_code
+            response = requests.request("GET", url, headers=headers, params=payload, timeout=50)
             result = response.json()
-
-            if status_code == 200:
-                return result.get("result")
-            return "Ошибка передачи данных"
         except requests.exceptions.RequestException as e:
-            print(f"Error: {e}")
+            return f"Error: {e}"
+        else:
+            return result.get("result")
     return None
