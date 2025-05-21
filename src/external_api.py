@@ -39,4 +39,4 @@ def get_convert_amount_rub(transaction: dict[str, Any]) -> Any | None:
             return f"Error: {e}"
         else:
             return result.get("result")
-    return None
+    return []
