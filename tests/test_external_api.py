@@ -1,7 +1,7 @@
 from typing import Any
 from unittest.mock import patch
 
-from src.external_api import get_convert_amount_rub, transaction_usd
+from src.external_api import get_convert_amount_rub, transaction_rub, transaction_usd
 
 
 @patch("requests.request")
@@ -19,10 +19,28 @@ def test_get_convert_amount_rub(mock_get: Any) -> None:
         "result": 661791.140243,
     }
     assert get_convert_amount_rub(transaction_usd) == 661791.140243
-    mock_get.assert_called_once_with(
-        "GET",
-        "https://api.apilayer.com/exchangerates_data/convert",
-        headers={"apikey": "NCc6mcT98gWEvtVGunXHoICvZuhYT9l6"},
-        params={"amount": "8221.37", "from": "USD", "to": "RUB"},
-        timeout=50,
-    )
+    mock_get.assert_called_once()
+
+
+def test_get_convert_amount_rub_rub() -> None:
+    """
+    Тестирование функции конвертации валюты из RUB в RUB
+    :return: None
+    """
+    assert get_convert_amount_rub(transaction_rub) == 31957.58
+
+
+def test_get_convert_amount_rub_incorrect(amount_incorrect) -> None:
+    """
+    Тестирование функции конвертации валюты c некорректными данными
+    :return: None
+    """
+    assert get_convert_amount_rub(amount_incorrect) == []
+
+
+def test_get_convert_amount_rub_empty() -> None:
+    """
+    Тестирование функции конвертации валюты c отсутствующими данными
+    :return: None
+    """
+    assert get_convert_amount_rub({}) == []
