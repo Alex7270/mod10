@@ -8,7 +8,10 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "pytest (>=8.3.5,<9.0.0)"
+    "pytest (>=8.3.5,<9.0.0)",
+    "requests (>=2.32.3,<3.0.0)",
+    "python-dotenv (>=1.1.0,<2.0.0)",
+    "types-requests (>=2.32.0.20250515,<3.0.0.0)",
 ]
 
 [tool.poetry]
@@ -34,6 +37,7 @@ build-backend = "poetry.core.masonry.api"
 disallow_untyped_defs = true
 warn_return_any = true
 warn_unreachable = true
+ignore_missing_imports = true
 strict = true
 exclude = '.venv'
 
