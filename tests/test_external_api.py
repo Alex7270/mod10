@@ -30,7 +30,7 @@ def test_get_convert_amount_rub_rub() -> None:
     assert get_convert_amount_rub(transaction_rub) == 31957.58
 
 
-def test_get_convert_amount_rub_incorrect(amount_incorrect) -> None:
+def test_get_convert_amount_rub_incorrect(amount_incorrect: dict[str, Any]) -> None:
     """
     Тестирование функции конвертации валюты c некорректными данными
     :return: None
