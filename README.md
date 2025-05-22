@@ -200,10 +200,15 @@ poetry add --group dev pytest-cov
 ```commandline
 poetry add requests
 ```
-- Установbnt библиотеку python-dotenv:
+- Установите библиотеку python-dotenv:
 ```commandline
 poetry add python-dotenv
 ```
+- Установите библиотеку pandas:
+```commandline
+poetry add pandas
+```
+
 
 - Чтобы запустить тесты с оценкой покрытия, можно воспользоваться следующими командами:  
   `pytest --cov`  — при активированном виртуальном окружении.  
