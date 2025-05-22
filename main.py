@@ -70,7 +70,7 @@ def main() -> None:
 
     print()
 
-    print(get_transaction("data/operations.json"))
+    get_transaction("data/operations.json")
 
 
 if __name__ == "__main__":

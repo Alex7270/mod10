@@ -6,7 +6,7 @@ from typing import Any
 logger = logging.getLogger(__name__)
 
 # создаем хендлер для вывода логов в файл
-file_handler = logging.FileHandler("logs/utils.log", mode="w")
+file_handler = logging.FileHandler("logs/utils.log", mode="w", encoding="utf-8")
 
 # создаем форматер
 file_formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s: %(message)s")
@@ -28,7 +28,7 @@ def get_transaction(path: str) -> list[dict[str, Any]] | Any:
     :return: list[dict[str, Any] | Any]
     """
     try:
-        logger.info("ok")
+        logger.info("Данные о финансовых транзакциях прочитаны")
         with open(path, encoding="utf-8") as f:
             data_list = json.load(f)
             return data_list
