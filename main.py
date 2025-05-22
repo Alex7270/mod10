@@ -1,5 +1,6 @@
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions, transactions
 from src.processing import filter_by_state, sort_by_date
+from src.utils import get_transaction
 from src.widget import get_date, mask_account_card
 
 
@@ -66,6 +67,10 @@ def main() -> None:
 
     for card_number in card_number_generator(1, 5):
         print(card_number)
+
+    print()
+
+    print(get_transaction("data/operations.json"))
 
 
 if __name__ == "__main__":
