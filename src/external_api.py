@@ -34,6 +34,7 @@ def get_convert_amount_rub(transaction: dict[str, Any]) -> Any | None:
         headers = {"apikey": api_key}
         try:
             response = requests.request("GET", url, headers=headers, params=payload, timeout=50)
+            response.raise_for_status()
             result = response.json()
         except requests.exceptions.RequestException as e:
             return f"Error: {e}"
