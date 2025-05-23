@@ -3,7 +3,7 @@ from typing import Any
 import pandas as pd
 
 
-def read_transaction_csv(path: str, row: int = 2) -> Any:
+def read_transactions_csv(path: str, row: int = 2) -> Any:
     """
     Чтение csv файла
     :param path: str
@@ -17,7 +17,7 @@ def read_transaction_csv(path: str, row: int = 2) -> Any:
         return f"Error: {e}"
 
 
-def read_transaction_xlsx(path: str, row: int = 2) -> Any:
+def read_transactions_xlsx(path: str, row: int = 2) -> Any:
     """
     Чтение xlsx файла
     :param path: str
