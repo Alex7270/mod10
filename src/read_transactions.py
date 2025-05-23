@@ -12,9 +12,13 @@ def read_transactions_csv(path: str, row: int = 2) -> Any:
     """
     try:
         df = pd.read_csv(path, delimiter=";").head(row)
-        return df.to_dict(orient="records")
+        df_lst = df.to_dict(orient="records")
+        if len(df_lst) != 0:
+            return df_lst
+        return []
     except Exception as e:
-        return f"Error: {e}"
+        print(f"Error: {e}")
+        return []
 
 
 def read_transactions_xlsx(path: str, row: int = 2) -> Any:
@@ -26,6 +30,10 @@ def read_transactions_xlsx(path: str, row: int = 2) -> Any:
     """
     try:
         df = pd.read_excel(path).head(row)
-        return df.to_dict(orient="records")
+        df_lst = df.to_dict(orient="records")
+        if len(df_lst) != 0:
+            return df_lst
+        return []
     except Exception as e:
-        return f"Error: {e}"
+        print(f"Error: {e}")
+        return []

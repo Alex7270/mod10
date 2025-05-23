@@ -9,7 +9,7 @@
 2. Модуль "widget" предоставляет функции для обработки информации как о картах, так и о счетах.
 3. Модуль "processing" содержит новые функции обработки данных по ключу и сортировки по дате.
 4. Модуль "generators" содержит функции для работы с массивами транзакций.  
-5. Модуль "read_transaction" предоставляет функции для считывания финансовых операций из CSV- и XLSX-файлов.
+5. Модуль "read_transactions" предоставляет функции для считывания финансовых операций из CSV- и XLSX-файлов.
 6. Модуль `main` запускает все вышеперечисленные модули.
 7. Модуль "decorators" обеспечивает более глубокий контроль и анализ поведения программы в процессе ее выполнения.  
 8. В модулях "utils" и "external_api" реализован функционал конвертации валют
@@ -52,7 +52,7 @@ from pprint import pprint
 
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions, transactions
 from src.processing import filter_by_state, sort_by_date
-from src.read_transactions import read_transaction_csv, read_transaction_xlsx
+from src.read_transactions import read_transactions_csv, read_transactions_xlsx
 from src.utils import get_transaction
 from src.widget import get_date, mask_account_card
 
@@ -127,11 +127,11 @@ def main() -> None:
 
   print()
 
-  pprint(read_transaction_csv("data/transactions.csv"), indent=4, sort_dicts=False)
+  pprint(read_transactions_csv("data/transactions.csv"), indent=4, sort_dicts=False)
 
   print()
 
-  pprint(read_transaction_xlsx("data/transactions_excel.xlsx"), indent=4, sort_dicts=False)
+  pprint(read_transactions_xlsx("data/transactions_excel.xlsx"), indent=4, sort_dicts=False)
 
 
 if __name__ == "__main__":
