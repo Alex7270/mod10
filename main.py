@@ -1,5 +1,8 @@
+from pprint import pprint
+
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions, transactions
 from src.processing import filter_by_state, sort_by_date
+from src.read_transaction import read_transaction_csv, read_transaction_xlsx
 from src.utils import get_transaction
 from src.widget import get_date, mask_account_card
 
@@ -71,6 +74,14 @@ def main() -> None:
     print()
 
     get_transaction("data/operations.json")
+
+    print()
+
+    pprint(read_transaction_csv("data/transactions.csv"), indent=4, sort_dicts=False)
+
+    print()
+
+    pprint(read_transaction_xlsx("data/transactions_excel.xlsx"), indent=4, sort_dicts=False)
 
 
 if __name__ == "__main__":
