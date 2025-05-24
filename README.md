@@ -277,9 +277,9 @@ poetry add pandas
 
 - Oтчёт в HTML будет выглядеть следующим образом:
 
-![img_3.png](img_3.png)   
-Произведены позитивные и негативные тесты для всех функций модулей `masks`, `widget`,`processing`,`generators`, `decorators`, `utils`, `external_api`.  
-Тестами покрыто 98% кода
+![img_4.png](img_4.png)  
+Произведены позитивные и негативные тесты для всех функций модулей `masks`, `widget`,`processing`,`generators`, `decorators`, `utils`, `external_api`, `read_transactions`.   
+Тестами покрыто 99% кода
 
 ---
 
