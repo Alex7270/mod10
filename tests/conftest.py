@@ -200,3 +200,8 @@ def expected_transaction_correct() -> list[dict[str, Any]]:
 @pytest.fixture
 def path_to_file_csv() -> str:
     return "data/transactions.csv"
+
+
+@pytest.fixture
+def path_to_file_excel() -> str:
+    return "data/transactions_excel.xlsx"
