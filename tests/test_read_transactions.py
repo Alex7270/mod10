@@ -9,7 +9,7 @@ def test_read_transactions_csv_correct(
     mock_csv: Any, path_to_file_csv: str, expected_transaction_correct: list[dict[str, Any]]
 ) -> None:
     """
-    Тестирование чтения транзакций из csv-файла
+    Тестирование функции чтения транзакций из csv-файла
     :param path_to_file_csv: str
     :param expected_transaction_correct: list[dict[str, Any]]
     :return: None
@@ -19,10 +19,18 @@ def test_read_transactions_csv_correct(
     mock_csv.assert_called_once_with(path_to_file_csv, delimiter=";")
 
 
-# @patch("pandas.read_excel")
-# def test_read_transactions_xlsx(mock_excel):
-#     """Тест excel"""
-#
-#     mock_excel.return_value.to_dict.return_value = [{"test": "test"}, {"test2": "test2"}]
-#     assert read_transactions_xlsx("data/transaction_excel.xlsx") == [{"test": "test"}, {"test2": "test2"}]
-#     mock_excel.assert_called_once_with("data/transaction_excel.xlsx")
+@patch("pandas.read_excel")
+def test_read_transactions_xlsx(
+    mock_excel: Any, path_to_file_excel: str, expected_transaction_correct: list[dict[str, Any]]
+) -> None:
+    """
+    Тестирование функции чтения транзакций из xlsx-файла
+    :param mock_excel: Any
+    :param path_to_file_excel: str
+    :param expected_transaction_correct: list[dict[str, Any]]
+    :return: None
+    """
+
+    mock_excel.return_value.to_dict.return_value = expected_transaction_correct
+    assert read_transactions_xlsx(path_to_file_excel) == expected_transaction_correct
+    mock_excel.assert_called_once_with(path_to_file_excel)
