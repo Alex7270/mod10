@@ -3,15 +3,13 @@ from typing import Any
 import pandas as pd
 
 
-def read_transactions_csv(path: str, row: int = 2) -> Any:
+def read_transactions_csv(path: str) -> Any:
     """
     Чтение csv файла
-    :param path: str
-    :param row: int
-    :return: Any
+    :param path: str   :return: Any
     """
     try:
-        df = pd.read_csv(path, delimiter=";").head(row)
+        df = pd.read_csv(path, delimiter=";")
         df_lst = df.to_dict(orient="records")
         if len(df_lst) != 0:
             return df_lst
@@ -21,15 +19,13 @@ def read_transactions_csv(path: str, row: int = 2) -> Any:
         return []
 
 
-def read_transactions_xlsx(path: str, row: int = 2) -> Any:
+def read_transactions_xlsx(path: str) -> Any:
     """
     Чтение xlsx файла
-    :param path: str
-    :param row: int
-    :return: Any
+    :param path: str   :return: Any
     """
     try:
-        df = pd.read_excel(path).head(row)
+        df = pd.read_excel(path)
         df_lst = df.to_dict(orient="records")
         if len(df_lst) != 0:
             return df_lst

@@ -2,7 +2,7 @@ from pprint import pprint
 
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions, transactions
 from src.processing import filter_by_state, sort_by_date
-from src.read_transactions import read_transactions_xlsx, read_transactions_csv
+from src.read_transactions import read_transactions_csv, read_transactions_xlsx
 from src.utils import get_transaction
 from src.widget import get_date, mask_account_card
 
