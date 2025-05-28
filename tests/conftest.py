@@ -256,3 +256,13 @@ def expected_filter() -> list[dict[str, Any]]:
             "to": "Счет 14211924144426031657",
         },
     ]
+
+
+@pytest.fixture
+def categories_operations() -> list[str]:
+    return ["Перевод организации", "Перевод с карты на карту", "Перевод со счета на счет", "Открытие вклада"]
+
+
+@pytest.fixture
+def expected_counting_categories() -> dict[str, int]:
+    return {"Перевод организации": 2, "Перевод с карты на карту": 1, "Перевод со счета на счет": 2}
