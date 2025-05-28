@@ -23,3 +23,13 @@ def test_filter_transactions_no_search(
     :return: None
     """
     assert filter_transactions(transactions, "kkkkkk") == []
+
+
+def test_filter_transactions_empty(transactions: list[dict[str, Any]], expected_filter: list[dict[str, Any]]) -> None:
+    """
+    Тестирование функции фильтрации транзакций по заданному ключевому слову с некорректными данными
+    :param transactions: list[dict[str, Any]]
+    :param expected_filter: list[dict[str, Any]]
+    :return: None
+    """
+    assert filter_transactions([], "перевод") == []
