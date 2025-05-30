@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from src.filters import filter_transactions
 from src.generators import filter_by_currency, transaction_descriptions
 from src.processing import filter_by_state, sort_by_date
@@ -92,14 +90,10 @@ def main() -> None:
         account_card_1 = mask_account_card(i.get("from")) if str(i.get("from")) not in ["nan", "None"] else ""
         account_card_2 = mask_account_card(i.get("to"))
 
-        amount = (
-            i.get("operationAmount", {}).get("amount", "")
-            if user_answer == "1" and user_answer_5 == "да"
-            else i.get("amount")
-        )
+        amount = str(i.get("operationAmount", "").get("amount", "")) if user_answer == "1" else str(i.get("amount"))
         currency_code = (
             i.get("operationAmount", {}).get("currency").get("code")
-            if user_answer == "1" and user_answer_5 == "да"
+            if user_answer == "1"
             else str(i.get("currency_code"))
         )
 
@@ -107,7 +101,7 @@ def main() -> None:
             f"{date} {next(description)}\n{account_card_1} "
             f"-> {account_card_2}\nСумма: {int(float(amount))} {currency_code}\n"
         )
-    pprint(transactions_filter)
+
     return None
 
 
