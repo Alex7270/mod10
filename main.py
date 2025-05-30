@@ -56,7 +56,7 @@ def main() -> None:
     if user_answer_3 == "да":
         user_answer_4 = input("Отсортировать по возрастанию или по убыванию?: ").lower()
         if user_answer_4 == "по убыванию":
-            transaction_sort = sort_by_date(transaction_state)
+            transaction_sort: list[dict[str, Any]] | str = sort_by_date(transaction_state)
         else:
             transaction_sort = sort_by_date(transaction_state, False)
     else:
@@ -64,7 +64,7 @@ def main() -> None:
 
     user_answer_5 = input("Выводить только рублевые транзакции? Да/Нет: ").lower()
     if user_answer_5 == "да" and user_answer == "1":
-        transaction_sort_rub = list(filter_by_currency(transaction_sort, "RUB"))
+        transaction_sort_rub = list(filter_by_currency(transaction_sort,"RUB"))
     elif user_answer_5 == "да" and user_answer in ["2", "3"]:
         transaction_sort_rub = [x for x in transaction_sort if not not x and x.get("currency_code", "") == "RUB"]
     else:
@@ -76,7 +76,7 @@ def main() -> None:
     user_answer_6 = input("Отфильтровать список транзакций по определенному слову в описании? Да/Нет: ").lower()
     if user_answer_6 == "да":
         user_answer_7 = input("Введите слово: ")
-        transactions_filter: list[dict[str, Any]] = filter_transactions(transaction_sort_rub, user_answer_7)
+        transactions_filter = filter_transactions(transaction_sort_rub, user_answer_7)
     else:
         transactions_filter = transaction_sort_rub
 
