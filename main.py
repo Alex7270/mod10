@@ -63,8 +63,10 @@ def main() -> None:
         transaction_sort = sort_by_date(transaction_state)
 
     user_answer_5 = input("Выводить только рублевые транзакции? Да/Нет: ").lower()
-    if user_answer_5 == "да":
+    if user_answer_5 == "да" and user_answer == "1":
         transaction_sort_rub = list(filter_by_currency(transaction_sort, "RUB"))
+    elif user_answer_5 == "да" and user_answer in ["2", "3"]:
+        transaction_sort_rub = [x for x in transaction_sort if not not x and x.get("currency_code", "") == "RUB"]
     else:
         transaction_sort_rub = transaction_sort
     if len(transaction_sort_rub) == 0:
@@ -83,22 +85,22 @@ def main() -> None:
     count = len(transactions_filter)
     description = transaction_descriptions(transactions_filter)
 
-    print(f"\nВсего банковских операций в выборке:{count}\n")
+    print(f"\nВсего банковских операций в выборке: {count}\n")
 
     for i in transactions_filter:
         date = get_date(i.get("date"))
-        account_card_1 = mask_account_card(i.get("from", "")) if str(i.get("from", "")) in ["nan", "None"] else ""
+        account_card_1 = mask_account_card(i.get("from")) if str(i.get("from")) not in ["nan", "None"] else ""
         account_card_2 = mask_account_card(i.get("to"))
 
         amount = (
             i.get("operationAmount", {}).get("amount", "")
             if user_answer == "1" and user_answer_5 == "да"
-            else i.get("amount", "")
+            else i.get("amount")
         )
         currency_code = (
             i.get("operationAmount", {}).get("currency").get("code")
             if user_answer == "1" and user_answer_5 == "да"
-            else i.get("currency_code", "")
+            else str(i.get("currency_code"))
         )
 
         print(
