@@ -8,7 +8,7 @@ def mask_account_card(number: str) -> str:
     """
     Функция маскировки номера банковской карты или счета
     """
-    number_lst = re.findall(r"\w+", number)
+    number_lst = re.findall(r"\w+", str(number))
 
     if len(number_lst) not in [0, 1]:
 
