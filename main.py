@@ -87,13 +87,24 @@ def main() -> None:
 
     for i in transactions_filter:
         date = get_date(i.get("date"))
-        account_card_1 = mask_account_card(i.get("from")) if str(i.get("from")) != "nan" else ""
+        account_card_1 = mask_account_card(i.get("from", "")) if str(i.get("from", "")) in ["nan", "None"] else ""
         account_card_2 = mask_account_card(i.get("to"))
-        amount = i.get("amount")
-        currency_code = i.get("currency_code")
 
+        amount = (
+            i.get("operationAmount", {}).get("amount", "")
+            if user_answer == "1" and user_answer_5 == "да"
+            else i.get("amount", "")
+        )
+        currency_code = (
+            i.get("operationAmount", {}).get("currency").get("code")
+            if user_answer == "1" and user_answer_5 == "да"
+            else i.get("currency_code", "")
+        )
 
-        print(f"{date} {next(description)}\n{account_card_1} -> {account_card_2}\nСумма: {int(amount)} {currency_code}\n")
+        print(
+            f"{date} {next(description)}\n{account_card_1} "
+            f"-> {account_card_2}\nСумма: {int(float(amount))} {currency_code}\n"
+        )
     pprint(transactions_filter)
     return None
 
