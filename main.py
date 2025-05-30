@@ -1,3 +1,5 @@
+from typing import Any
+
 from src.filters import filter_transactions
 from src.generators import filter_by_currency, transaction_descriptions
 from src.processing import filter_by_state, sort_by_date
@@ -74,11 +76,11 @@ def main() -> None:
     user_answer_6 = input("Отфильтровать список транзакций по определенному слову в описании? Да/Нет: ").lower()
     if user_answer_6 == "да":
         user_answer_7 = input("Введите слово: ")
-        transactions_filter = filter_transactions(transaction_sort_rub, user_answer_7)
+        transactions_filter: list[dict[str, Any]] = filter_transactions(transaction_sort_rub, user_answer_7)
     else:
         transactions_filter = transaction_sort_rub
 
-    print("Распечатываю итоговый список транзакций...")
+    print("\nРаспечатываю итоговый список транзакций...")
 
     count = len(transactions_filter)
     description = transaction_descriptions(transactions_filter)
@@ -86,9 +88,9 @@ def main() -> None:
     print(f"\nВсего банковских операций в выборке: {count}\n")
 
     for i in transactions_filter:
-        date = get_date(i.get("date"))
-        account_card_1 = mask_account_card(i.get("from")) if str(i.get("from")) not in ["nan", "None"] else ""
-        account_card_2 = mask_account_card(i.get("to"))
+        date = get_date(str(i.get("date")))
+        account_card_1 = mask_account_card(str(i.get("from"))) if str(i.get("from")) not in ["nan", "None"] else ""
+        account_card_2 = mask_account_card(str(i.get("to")))
 
         amount = str(i.get("operationAmount", "").get("amount", "")) if user_answer == "1" else str(i.get("amount"))
         currency_code = (
